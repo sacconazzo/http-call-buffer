@@ -33,7 +33,7 @@ const call = async () => {
 //optional (default is 5 mins)
 const refreshTime = 1000 * 10 //10 seconds
 
-const mybufferedCall = new Buffer(call, refreshTime)
+const mybufferedCall = new Buffer(call, "bufferedCall", refreshTime)
 
 async function loop() {
   console.log(await mybufferedCall.call())
