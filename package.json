@@ -1,0 +1,33 @@
+{
+  "name": "http-call-buffer",
+  "version": "1.0.0",
+  "description": "Buffer results from http call, update only when needed",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sacconazzo/http-call-buffer.git"
+  },
+  "keywords": [
+    "http",
+    "http call",
+    "http client",
+    "buffered",
+    "buffer",
+    "api",
+    "restapi",
+    "middleware",
+    "protect",
+    "resources",
+    "external",
+    "services"
+  ],
+  "author": "\"api\",",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sacconazzo/http-call-buffer/issues"
+  },
+  "homepage": "https://github.com/sacconazzo/http-call-buffer#readme"
+}

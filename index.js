@@ -57,3 +57,5 @@ const service = function (call, name, refreshTime, log) {
 }
 
 exports = module.exports = service
+
+//export default service
