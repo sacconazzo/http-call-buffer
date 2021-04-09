@@ -1,6 +1,6 @@
 {
   "name": "http-call-buffer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Buffer results from http call, update only when needed",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,7 @@
     "external",
     "services"
   ],
-  "author": "\"api\",",
+  "author": "giona.tech",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/sacconazzo/http-call-buffer/issues"

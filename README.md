@@ -22,13 +22,12 @@ npm http-call-buffer
 Calling the same service each second. Service buffers the result and returns it. Service updates buffer after 10 seconds (each 10 seconds if needed).
 
 ```js
-import Buffer from "http-call-buffer"
+const Buffer = require("http-call-buffer")
 
 //Any Promise functions allowed
 const call = async () => {
-  return await new Promise((response) => {
-    setTimeout(() => response(new Date().getTime()), 1000)
-  })
+  const response = await fetch("http://worldtimeapi.org/api/ip")
+  return await response.json()
 }
 
 //optional (default is 5 mins)
@@ -45,4 +44,4 @@ loop()
 
 ## Refs
 
-https://www.npmjs.com/package/remote-service-buffer
+https://www.npmjs.com/package/http-call-buffer
