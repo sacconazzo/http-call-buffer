@@ -1,6 +1,13 @@
-declare namespace service {
-  export function get(): string
+declare type BufferOptions = {
+  name: string
+  refreshTime: number
+  awaitRefresh: boolean
+  showLog: boolean
 }
 
-declare function service(call: Promise<any>, name: string, refreshTime?: number, log?: boolean): void
+declare namespace service {
+  export function call(): Promise<any>
+}
+
+declare function service(call: Promise<any>, options: BufferOptions) {}
 export = service

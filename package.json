@@ -1,6 +1,6 @@
 {
   "name": "http-call-buffer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Buffer results from http call (or any promise), update only when needed",
   "main": "index.js",
   "scripts": {
