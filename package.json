@@ -1,7 +1,7 @@
 {
   "name": "http-call-buffer",
-  "version": "1.0.2",
-  "description": "Buffer results from http call, update only when needed",
+  "version": "1.0.3",
+  "description": "Buffer results from http call (or any promise), update only when needed",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
@@ -14,6 +14,8 @@
     "http",
     "http call",
     "http client",
+    "promise",
+    "promises",
     "buffered",
     "buffer",
     "api",
