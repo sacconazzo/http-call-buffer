@@ -14,7 +14,7 @@ Service is faster. When You execute Service, it first returns a buffer, then per
 ## Installation
 
 ```npm
-npm http-call-buffer
+npm -i http-call-buffer
 ```
 
 ## Example
@@ -30,13 +30,18 @@ const call = async () => {
   return await response.json()
 }
 
-//optional (default is 5 mins)
-const refreshTime = 1000 * 10 //10 seconds
+//optional
+const options = {
+  name: "TimeStampBuffer",
+  refreshTime: 1000 * 10, //default 5 minutes
+  awaitRefresh: true, //default false
+  showLog: true, //default false
+}
 
-const mybufferedCall = new Buffer(call, "bufferedCall", refreshTime)
+const myBufferedCall = new Buffer(call, options)
 
 async function loop() {
-  console.log(await mybufferedCall.call())
+  console.log(await myBufferedCall.call())
   setTimeout(loop, 1000)
 }
 loop()

@@ -1,8 +1,9 @@
-const service = function (call, name, refreshTime, log) {
-  this.name = name
+const service = function (call, options = {}) {
+  this.name = options.name || ""
   this._call = call
-  this._refresh = refreshTime || 1000 * 60 * 5
-  this._log = log
+  this._refresh = options.refreshTime || 1000 * 60 * 5
+  this._awaitRefresh = options.awaitRefresh || false
+  this._log = options.showLog || false
   this._data = null
   this._time = 0
   this._loading = false
@@ -11,7 +12,7 @@ const service = function (call, name, refreshTime, log) {
     this._loading = on ? new Date().getTime() : null
   }
 
-  this._readyToLoad = function (cb) {
+  this._readyToLoad = function () {
     const now = new Date()
     const diff = now.getTime() - this._time
     const timeout = now.getTime() - this._loading
@@ -20,7 +21,11 @@ const service = function (call, name, refreshTime, log) {
       (this._loading && timeout > 1000 * 60) //check loading timeout
     ) {
       if (this._log) console.log(`refreshing ${this.name}...`)
-      cb(now, diff, timeout)
+      this._now = now
+      this._diff = diff
+      return true
+    } else {
+      return false
     }
   }
 
@@ -40,11 +45,15 @@ const service = function (call, name, refreshTime, log) {
 
   this.call = async function () {
     if (this._data) {
-      this._readyToLoad((now, diff) => {
-        this._getRemote().then(() => {
-          if (this._log) console.log(`Refresh ${this.name} after ${diff}ms: ${now.toString()}`)
-        }) //refresh buffer
-      })
+      if (this._readyToLoad()) {
+        await new Promise((res) => {
+          if (!this._awaitRefresh) res()
+          this._getRemote().then(() => {
+            if (this._log) console.log(`Refresh ${this.name} after ${this._diff}ms: ${this._now.toString()}`)
+            if (this._awaitRefresh) res()
+          }) //refresh buffer
+        })
+      }
       return this._data //return buffer
     } else {
       return await this._getRemote() //if not yet been loaded
@@ -52,7 +61,7 @@ const service = function (call, name, refreshTime, log) {
   }
 
   this.call().then(() => {
-    if (this._log) console.log(`Linkd ${name}`)
+    if (this._log) console.log(`Linkd ${this.name}`)
   }) //load buffer
 }
 
