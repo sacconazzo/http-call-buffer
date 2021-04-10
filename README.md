@@ -14,7 +14,7 @@ Service is faster. When You execute Service, it first returns a buffer, then per
 ## Installation
 
 ```npm
-npm -i http-call-buffer
+npm i http-call-buffer
 ```
 
 ## Example
