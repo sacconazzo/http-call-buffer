@@ -20,10 +20,7 @@ const service = function (call, options = {}) {
       (!this._loading && diff > this._refresh) || //check buffer expired
       (this._loading && timeout > 1000 * 60) //check loading timeout
     ) {
-      if (this._log)
-        console.log(
-          `${new Date().toLocaleString()}: Refreshing ${this.name}...`
-        )
+      if (this._log) console.log(`${new Date().toLocaleString()}: Refreshing ${this.name}...`)
       this._now = now
       this._diff = diff
       return true
@@ -52,25 +49,19 @@ const service = function (call, options = {}) {
         await new Promise((res) => {
           if (!this._awaitRefresh) res()
           this._getRemote().then(() => {
-            if (this._log)
-              console.log(
-                `${new Date().toLocaleString()}: Refresh ${this.name} after ${
-                  this._diff
-                }ms`
-              )
+            if (this._log) console.log(`${new Date().toLocaleString()}: Refresh ${this.name} after ${this._diff}ms`)
             if (this._awaitRefresh) res()
           }) //refresh buffer
         })
       }
       return this._data //return buffer
     } else {
-      return await this._getRemote() //if not yet been loaded
+      return this._getRemote() //if not yet been loaded
     }
   }
 
   this.call().then((data) => {
-    if (this._log && data)
-      console.log(`${new Date().toLocaleString()}: Linkd ${this.name}`)
+    if (this._log) console.log(`${new Date().toLocaleString()}: Linkd ${this.name} ${!data ? '(no data)' : ''}`)
   }) //load buffer
 }
 
