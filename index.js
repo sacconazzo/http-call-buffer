@@ -1,5 +1,5 @@
 const service = function (call, options = {}) {
-  this.name = options.name || ""
+  this.name = options.name || ''
   this._call = call
   this._refresh = options.refreshTime || 1000 * 60 * 5
   this._awaitRefresh = options.awaitRefresh || false
@@ -20,7 +20,10 @@ const service = function (call, options = {}) {
       (!this._loading && diff > this._refresh) || //check buffer expired
       (this._loading && timeout > 1000 * 60) //check loading timeout
     ) {
-      if (this._log) console.log(`${new Date().toLocaleString()}: Refreshing ${this.name}...`)
+      if (this._log)
+        console.log(
+          `${new Date().toLocaleString()}: Refreshing ${this.name}...`
+        )
       this._now = now
       this._diff = diff
       return true
@@ -49,7 +52,12 @@ const service = function (call, options = {}) {
         await new Promise((res) => {
           if (!this._awaitRefresh) res()
           this._getRemote().then(() => {
-            if (this._log) console.log(`${new Date().toLocaleString()}: Refresh ${this.name} after ${this._diff}ms`)
+            if (this._log)
+              console.log(
+                `${new Date().toLocaleString()}: Refresh ${this.name} after ${
+                  this._diff
+                }ms`
+              )
             if (this._awaitRefresh) res()
           }) //refresh buffer
         })
@@ -60,8 +68,9 @@ const service = function (call, options = {}) {
     }
   }
 
-  this.call().then(() => {
-    if (this._log) console.log(`${new Date().toLocaleString()}: Linkd ${this.name}`)
+  this.call().then((data) => {
+    if (this._log && data)
+      console.log(`${new Date().toLocaleString()}: Linkd ${this.name}`)
   }) //load buffer
 }
 

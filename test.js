@@ -1,4 +1,4 @@
-const Buffer = require("./index.js")
+const Buffer = require('./index.js')
 
 //Any Promise functions allowed
 const call = async () => {
@@ -9,7 +9,7 @@ const call = async () => {
 
 //optional
 const options = {
-  name: "TimeStampBuffer",
+  name: 'TimeStampBuffer',
   refreshTime: 1000 * 10, //default 5 minutes
   awaitRefresh: true, //default false
   showLog: true, //default false
