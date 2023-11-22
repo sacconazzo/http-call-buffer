@@ -49,7 +49,10 @@ const service = function (call, options = {}) {
         await new Promise((res) => {
           if (!this._awaitRefresh) res()
           this._getRemote().then(() => {
-            if (this._log) console.log(`${new Date().toLocaleString()}: Refresh ${this.name} after ${this._diff}ms`)
+            if (this._log)
+              console.log(
+                `${new Date().toLocaleString()}: Refresh ${this.name} after ${Math.trunc(this._diff / 1000)}s`
+              )
             if (this._awaitRefresh) res()
           }) //refresh buffer
         })
